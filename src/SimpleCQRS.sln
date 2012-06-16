@@ -6,7 +6,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF3C709C-758C-451D-8B6C-4222D1BE8EDF}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
-		Simple CQRS.vsmdi = Simple CQRS.vsmdi
+		SimpleCQRS.vsmdi = SimpleCQRS.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
@@ -42,9 +42,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCqrs.StructureMap", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCqrs.Autofac", "ServiceLocators\SimpleCqrs.Autofac\SimpleCqrs.Autofac.csproj", "{193A5D78-4018-4FC1-AB15-2CBFD9C3C9F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLocators", "ServiceLocators", "{F37F6E4D-F532-4B82-A17F-199E2C7EEC23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCqrs.Autofac.Tests", "Tests\ServiceLocators\SimpleCqrs.Autofac.Tests\SimpleCqrs.Autofac.Tests.csproj", "{E61BB6D6-D95A-439C-9DC1-53DBBD89ACEF}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Simple CQRS.vsmdi
+		CategoryFile = SimpleCQRS.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,10 @@ Global
 		{193A5D78-4018-4FC1-AB15-2CBFD9C3C9F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{193A5D78-4018-4FC1-AB15-2CBFD9C3C9F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{193A5D78-4018-4FC1-AB15-2CBFD9C3C9F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E61BB6D6-D95A-439C-9DC1-53DBBD89ACEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E61BB6D6-D95A-439C-9DC1-53DBBD89ACEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E61BB6D6-D95A-439C-9DC1-53DBBD89ACEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E61BB6D6-D95A-439C-9DC1-53DBBD89ACEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +114,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6AEAEE90-CF43-47CE-BD60-9F9519120BC6} = {BE8A5F95-23AD-4B5D-BA21-004909E80F00}
 		{D3DFE07B-B78C-4AF2-A886-002A09D9FAA0} = {BE8A5F95-23AD-4B5D-BA21-004909E80F00}
+		{F37F6E4D-F532-4B82-A17F-199E2C7EEC23} = {BE8A5F95-23AD-4B5D-BA21-004909E80F00}
 		{201A4DF5-2217-4202-80E8-E784737366BC} = {77CC485D-D260-45FC-A161-3DDF3A571C41}
 		{65B52205-E45D-4D6B-8F48-AFBC4406BEE8} = {77CC485D-D260-45FC-A161-3DDF3A571C41}
 		{BEEBFC8E-91EC-4E24-8223-395C2302C1B3} = {77CC485D-D260-45FC-A161-3DDF3A571C41}
@@ -115,5 +124,6 @@ Global
 		{193A5D78-4018-4FC1-AB15-2CBFD9C3C9F4} = {0C8AE82D-CACF-44CD-BE4F-222041AC4699}
 		{07C2BF77-9646-4C39-BDB2-852B76AA6C75} = {51C20E77-8726-49E8-9061-161DF28973E7}
 		{EE1B7085-F7BC-48BD-B058-C33DF4CD0F74} = {51C20E77-8726-49E8-9061-161DF28973E7}
+		{E61BB6D6-D95A-439C-9DC1-53DBBD89ACEF} = {F37F6E4D-F532-4B82-A17F-199E2C7EEC23}
 	EndGlobalSection
 EndGlobal
