@@ -28,7 +28,7 @@ namespace SimpleCqrs.NServiceBus.Commanding
             return commandTypeToDestinationLookup[typeof(TCommand)];
         }
 
-        public int Execute<TCommand>(TCommand command) where TCommand : ICommand
+        public int Execute<TCommand>(TCommand command) where TCommand : SimpleCqrs.Commanding.ICommand
         {
             var bus = serviceLocator.Resolve<IBus>();
             var destination = GetDestinationForCommandType<TCommand>();
@@ -42,7 +42,7 @@ namespace SimpleCqrs.NServiceBus.Commanding
             return ((CompletionResult)asyncResult.AsyncState).ErrorCode;
         }
 
-        public void Send<TCommand>(TCommand command) where TCommand : ICommand
+        public void Send<TCommand>(TCommand command) where TCommand : SimpleCqrs.Commanding.ICommand
         {
             var bus = serviceLocator.Resolve<IBus>();
             var destination = commandTypeToDestinationLookup[typeof(TCommand)];

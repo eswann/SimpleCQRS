@@ -43,7 +43,7 @@ namespace SimpleCqrs.NServiceBus.Eventing
                     {
                         var messageType = domainEventMessageType.MakeGenericType(domainEventType);
                         domainEventMessageTypes.Add(messageType);
-                        bus.RegisterMessageType(messageType, mapping.Endpoint, false);
+                        bus.RegisterMessageType(messageType, new Address(mapping.QueueName, mapping.MachineName));
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace SimpleCqrs.NServiceBus.Eventing
                     {
                         var messageType = domainEventMessageType.MakeGenericType(domainEventType);
                         domainEventMessageTypes.Add(messageType);
-                        bus.RegisterMessageType(messageType, mapping.Endpoint, false);
+                        bus.RegisterMessageType(messageType, new Address(mapping.QueueName, mapping.MachineName));
                     }
                 }
             }

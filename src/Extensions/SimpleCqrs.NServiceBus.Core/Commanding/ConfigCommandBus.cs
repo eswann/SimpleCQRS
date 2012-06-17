@@ -32,7 +32,7 @@ namespace SimpleCqrs.NServiceBus.Commanding
             ExecuteCommandTimeout = TimeSpan.FromSeconds(10);
             var commandBusConfig = GetConfigSection<CommandBusConfig>();
             var commandTypes = TypesToScan
-                .Where(type => typeof(ICommand).IsAssignableFrom(type))
+                .Where(type => typeof(SimpleCqrs.Commanding.ICommand).IsAssignableFrom(type))
                 .ToList();
 
             RegisterAssemblyCommandDestinationMappings(commandBusConfig, commandTypes);

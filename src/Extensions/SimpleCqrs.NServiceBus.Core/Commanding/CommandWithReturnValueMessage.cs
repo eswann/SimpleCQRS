@@ -7,6 +7,6 @@ namespace SimpleCqrs.NServiceBus.Commanding
     [Serializable]
     public class CommandWithReturnValueMessage : IMessage
     {
-        public ICommand Command { get; set; }
+        public SimpleCqrs.Commanding.ICommand Command { get; set; }
     }
 }
