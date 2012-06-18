@@ -38,16 +38,16 @@ namespace SimpleCqrs.Autofac
         /// </summary>
         public const string CallingDelegateNullErrorMessage = "The calling delegate cannot be null";
 
-        private ContainerBuilder _builder;
+        private readonly ContainerBuilder _builder;
 
         private bool _registrationsUpdated;
 
         private IContainer _container;
 
-		public AutofacServiceLocator(){}
+		public AutofacServiceLocator() : this(new ContainerBuilder()) {}
 
 
-        public AutofacServiceLocator(ContainerBuilder builder) : this()
+        public AutofacServiceLocator(ContainerBuilder builder)
         {
             if (builder == null)
             {
@@ -72,6 +72,14 @@ namespace SimpleCqrs.Autofac
                 _registrationsUpdated = false;
 
                 return _container;
+            }
+        }
+
+        public ContainerBuilder Builder
+        {
+            get
+            {
+                return _builder;
             }
         }
 
@@ -130,11 +138,14 @@ namespace SimpleCqrs.Autofac
 			// Work-around, also register this implementation to service mapping
 			// without the generated key above.
             Builder.RegisterType(implType).As<TInterface>();
+
+		    _registrationsUpdated = true;
 		}
 
 		public void Register<TInterface, TImplementation>() where TImplementation : class, TInterface
 		{
             Builder.RegisterType<TImplementation>().As<TInterface>();
+            _registrationsUpdated = true;
 		}
 
 		public void Register<TInterface, TImplementation>(string key) where TImplementation : class, TInterface
@@ -145,6 +156,7 @@ namespace SimpleCqrs.Autofac
             }
 
             Builder.RegisterType<TImplementation>().Named<TInterface>(key);
+            _registrationsUpdated = true;
 		}
 
         public void Register(string key, Type implType)
@@ -161,6 +173,7 @@ namespace SimpleCqrs.Autofac
             }
 
             Builder.RegisterType(implType).Named(key, implType);
+            _registrationsUpdated = true;
 		}
 
 		public void Register(Type serviceType, Type implType)
@@ -176,6 +189,7 @@ namespace SimpleCqrs.Autofac
             }
 
             Builder.RegisterType(implType).As(serviceType);
+            _registrationsUpdated = true;
 		}
 
 		public void Register<TInterface>(TInterface instance) where TInterface : class
@@ -186,6 +200,7 @@ namespace SimpleCqrs.Autofac
             }
 
             Builder.RegisterInstance(instance).As<TInterface>();
+            _registrationsUpdated = true;
 		}
 
 		public void Register<TInterface>(Func<TInterface> factoryMethod) where TInterface : class
@@ -196,6 +211,7 @@ namespace SimpleCqrs.Autofac
             }
 
             Builder.Register(x => factoryMethod()).As<TInterface>();
+            _registrationsUpdated = true;
 		}
 
 		public void Release(object instance)
@@ -254,18 +270,5 @@ namespace SimpleCqrs.Autofac
             IsDisposed = true;
         }
 
-
-        protected ContainerBuilder Builder
-        {
-            get
-            {
-                if(_builder == null)
-                {
-                    _registrationsUpdated = true;
-                    _builder = new ContainerBuilder();
-                }
-                return _builder;
-            }
-        }
     }
 }
