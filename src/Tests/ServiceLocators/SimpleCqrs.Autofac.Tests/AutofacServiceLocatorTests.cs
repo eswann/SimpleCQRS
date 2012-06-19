@@ -21,7 +21,7 @@ namespace SimpleCqrs.Autofac.Tests
         [TestMethod]
         public void can_initialize_a_new_instance_with_a_existing_container()
         {
-            var sut = new AutofacServiceLocator(new ContainerBuilder());
+            var sut = new AutofacServiceLocator(new ContainerBuilder().Build());
 
             sut.Should().NotBeNull();
         }
@@ -32,8 +32,8 @@ namespace SimpleCqrs.Autofac.Tests
             AutofacServiceLocator sut = null;
             Action initializing = () => sut = new AutofacServiceLocator(null);
             initializing.ShouldThrow<ArgumentNullException>()
-                .WithMessage(AutofacServiceLocator.BuilderNullErrorMessage, ComparisonMode.Substring)
-                .WithMessage("builder", ComparisonMode.Substring);
+                .WithMessage(AutofacServiceLocator.ContainerNullErrorMessage, ComparisonMode.Substring)
+                .WithMessage("container", ComparisonMode.Substring);
         }
     }
 
@@ -408,7 +408,7 @@ namespace SimpleCqrs.Autofac.Tests
 
         public AutofacServiceLocatorHelper()
         {
-            this.AutofacServiceLocator = new AutofacServiceLocator(new ContainerBuilder());
+            this.AutofacServiceLocator = new AutofacServiceLocator(new ContainerBuilder().Build());
         }
 
         public void Dispose()

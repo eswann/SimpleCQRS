@@ -19,9 +19,9 @@ namespace SimpleCqrs.Autofac
         public const string KeyNullErrorMessage = "The key cannot be null, empty or a string with white spaces only";
 
         /// <summary>
-        /// Error message used when the kernel is null
+        /// Error message used when the container is null
         /// </summary>
-        public const string BuilderNullErrorMessage = "The specified builder cannot be null";
+        public const string ContainerNullErrorMessage = "The specified container cannot be null";
 
         /// <summary>
         /// Error message used when the reset method is called, actually it is not supported because Autofac does not suppor reseting the container
@@ -38,38 +38,34 @@ namespace SimpleCqrs.Autofac
         /// </summary>
         public const string CallingDelegateNullErrorMessage = "The calling delegate cannot be null";
 
-        private readonly ContainerBuilder _builder;
+        private ContainerBuilder _builder;
 
         private bool _registrationsUpdated;
 
         private IContainer _container;
 
-		public AutofacServiceLocator() : this(new ContainerBuilder()) {}
+		public AutofacServiceLocator() : this(new ContainerBuilder().Build()) {}
 
 
-        public AutofacServiceLocator(ContainerBuilder builder)
+        public AutofacServiceLocator(IContainer container)
         {
-            if (builder == null)
+            if (container == null)
             {
-                throw new ArgumentNullException("builder", BuilderNullErrorMessage);
+                throw new ArgumentNullException("container", ContainerNullErrorMessage);
             }
 
-            _builder = builder;
+            _container = container;
         }
 
         public IContainer Container
         {
             get
             {
-                if(_container == null)
-                {
-                    _container = Builder.Build();
-                }
-                else if (_registrationsUpdated)
+                if (_registrationsUpdated)
                 {
                     Builder.Update(_container);
                 }
-                _registrationsUpdated = false;
+                Builder = null;
 
                 return _container;
             }
@@ -79,8 +75,13 @@ namespace SimpleCqrs.Autofac
         {
             get
             {
+                if(_builder == null)
+                {
+                    Builder = new ContainerBuilder();
+                }
                 return _builder;
             }
+            protected set { _builder = value; }
         }
 
 		public T Resolve<T>() where T : class
